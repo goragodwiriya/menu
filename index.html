@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-level Animated Menu</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Menu Styles */
+        .menu-container {
+            position: relative;
+            background: #333;
+            padding: 0 20px;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            position: relative;
+            padding: 15px 20px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .menu-item:hover {
+            background-color: #444;
+        }
+
+        /* Submenu styling */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #444;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            min-width: 200px;
+            z-index: 1000;
+        }
+
+        .submenu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu .menu-item {
+            display: block;
+            padding: 12px 20px;
+            white-space: nowrap;
+        }
+
+        .level-2, .level-3 {
+            top: 0;
+            left: 100%;
+        }
+
+        /* Arrow indicators for items with submenus */
+        .has-submenu::after {
+            content: '▸';
+            margin-left: 8px;
+        }
+
+        /* Hover effect */
+        .menu-item:hover > .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Documentation styles */
+        .documentation {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .documentation h1,
+        .documentation h2 {
+            margin-bottom: 15px;
+        }
+
+        .documentation p,
+        .documentation ul {
+            margin-bottom: 10px;
+        }
+
+        .documentation code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Example Menu Structure -->
+    <nav id="mainMenu" class="menu-container">
+        <ul class="menu">
+            <li class="menu-item has-submenu">
+                Products
+                <ul class="submenu">
+                    <li class="menu-item has-submenu">
+                        Electronics
+                        <ul class="submenu level-2">
+                            <li class="menu-item has-submenu">
+                                Computers
+                                <ul class="submenu level-3">
+                                    <li class="menu-item">Laptops</li>
+                                    <li class="menu-item">Desktops</li>
+                                    <li class="menu-item">Accessories</li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">Smartphones</li>
+                            <li class="menu-item">Tablets</li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">Clothing</li>
+                    <li class="menu-item">Books</li>
+                </ul>
+            </li>
+            <li class="menu-item has-submenu">
+                Services
+                <ul class="submenu">
+                    <li class="menu-item">Consulting</li>
+                    <li class="menu-item">Training</li>
+                    <li class="menu-item">Support</li>
+                </ul>
+            </li>
+            <li class="menu-item">About</li>
+            <li class="menu-item">Contact</li>
+        </ul>
+    </nav>
+
+    <!-- Documentation -->
+    <div class="documentation">
+        <h1>Multi-level Animated Menu Documentation</h1>
+        
+        <h2>Features</h2>
+        <ul>
+            <li>Supports up to 3 levels of nested menus</li>
+            <li>Smooth animations for menu transitions</li>
+            <li>Automatic position adjustment to stay within viewport</li>
+            <li>Keyboard navigation support</li>
+            <li>Responsive design</li>
+            <li>Cross-browser compatible</li>
+        </ul>
+
+        <h2>Usage Guide</h2>
+        <p>To implement this menu in your project:</p>
+        <ol>
+            <li>Copy the entire HTML structure and CSS styles</li>
+            <li>Customize the menu items by modifying the HTML structure</li>
+            <li>Adjust the styles in the CSS section to match your design</li>
+        </ol>
+
+        <h2>HTML Structure</h2>
+        <p>Basic structure for menu items:</p>
+        <pre><code>
+&lt;li class="menu-item has-submenu"&gt;
+    Menu Item
+    &lt;ul class="submenu"&gt;
+        &lt;li class="menu-item"&gt;Submenu Item&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/li&gt;
+        </code></pre>
+
+        <h2>CSS Customization</h2>
+        <p>Key CSS classes to customize:</p>
+        <ul>
+            <li><code>.menu-container</code> - Main menu container</li>
+            <li><code>.menu-item</code> - Individual menu items</li>
+            <li><code>.submenu</code> - Submenu containers</li>
+            <li><code>.has-submenu</code> - Items with submenus</li>
+        </ul>
+
+        <h2>Keyboard Navigation</h2>
+        <p>Supported keyboard controls:</p>
+        <ul>
+            <li><code>Tab</code> - Navigate through menu items</li>
+            <li><code>Enter</code> - Open submenu</li>
+            <li><code>Escape</code> - Close submenu</li>
+            <li><code>Arrow Keys</code> - Navigate menu items</li>
+        </ul>
+
+        <h2>Browser Support</h2>
+        <p>This menu is compatible with:</p>
+        <ul>
+            <li>Chrome (latest)</li>
+            <li>Firefox (latest)</li>
+            <li>Safari (latest)</li>
+            <li>Edge (latest)</li>
+        </ul>
+    </div>
+
+    <script>
+        // Menu functionality
+        class MultiLevelMenu {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                this.activeMenus = new Set();
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.setupKeyboardNavigation();
+            }
+
+            setupEventListeners() {
+                // Add tabindex to all menu items
+                this.container.querySelectorAll('.menu-item').forEach(item => {
+                    item.setAttribute('tabindex', '0');
+                });
+
+                // Mouse events
+                this.container.addEventListener('mouseleave', () => {
+                    this.closeAllSubmenus();
+                });
+            }
+
+            setupKeyboardNavigation() {
+                this.container.addEventListener('keydown', (e) => {
+                    const activeItem = document.activeElement;
+                    if (!activeItem.classList.contains('menu-item')) return;
+
+                    switch(e.key) {
+                        case 'Enter':
+                            this.toggleSubmenu(activeItem);
+                            break;
+                        case 'Escape':
+                            this.closeAllSubmenus();
+                            activeItem.blur();
+                            break;
+                        case 'ArrowDown':
+                            e.preventDefault();
+                            this.navigateNext(activeItem);
+                            break;
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            this.navigatePrevious(activeItem);
+                            break;
+                        case 'ArrowRight':
+                            if (activeItem.classList.contains('has-submenu')) {
+                                e.preventDefault();
+                                this.toggleSubmenu(activeItem);
+                            }
+                            break;
+                        case 'ArrowLeft':
+                            const parentMenu = activeItem.closest('.submenu');
+                            if (parentMenu) {
+                                e.preventDefault();
+                                parentMenu.classList.remove('active');
+                                const parentItem = parentMenu.closest('.menu-item');
+                                if (parentItem) parentItem.focus();
+                            }
+                            break;
+                    }
+                });
+            }
+
+            toggleSubmenu(menuItem) {
+                const submenu = menuItem.querySelector('.submenu');
+                if (!submenu) return;
+
+                const isActive = submenu.classList.contains('active');
+                this.closeAllSubmenus();
+
+                if (!isActive) {
+                    submenu.classList.add('active');
+                    this.adjustSubmenuPosition(submenu);
+                    const firstItem = submenu.querySelector('.menu-item');
+                    if (firstItem) firstItem.focus();
+                }
+            }
+
+            navigateNext(currentItem) {
+                const items = Array.from(currentItem.parentElement.children);
+                const currentIndex = items.indexOf(currentItem);
+                const nextItem = items[currentIndex + 1];
+                if (nextItem) nextItem.focus();
+            }
+
+            navigatePrevious(currentItem) {
+                const items = Array.from(currentItem.parentElement.children);
+                const currentIndex = items.indexOf(currentItem);
+                const prevItem = items[currentIndex - 1];
+                if (prevItem) prevItem.focus();
+            }
+
+            adjustSubmenuPosition(submenu) {
+                const rect = submenu.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                if (rect.right > viewportWidth) {
+                    submenu.style.left = 'auto';
+                    submenu.style.right = '100%';
+                }
+
+                if (rect.bottom > viewportHeight) {
+                    const overflowAmount = rect.bottom - viewportHeight;
+                    submenu.style.top = `${-overflowAmount}px`;
+                }
+            }
+
+            closeAllSubmenus() {
+                this.container.querySelectorAll('.submenu.active').forEach(submenu => {
+                    submenu.classList.remove('active');
+                });
+            }
+        }
+
+        // Initialize the menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const menu = new MultiLevelMenu('mainMenu');
+        });
+    </script>
+</body>
+</html>

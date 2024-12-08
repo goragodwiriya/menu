@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Menu with Article</title>
+  <style>
+    /* Reset styles */
+    body,
+    h1,
+    h2,
+    p,
+    ul,
+    li,
+    a {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header styles */
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* Navigation styles */
+    nav {
+      position: relative;
+      background: #333;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      display: block;
+      padding: 1rem;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .menu a:hover {
+      background: #575757;
+    }
+
+    /* Submenu styles */
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #444;
+      list-style: none;
+      min-width: 200px;
+    }
+
+    .submenu li {
+      position: relative;
+    }
+
+    .submenu a {
+      padding: 0.8rem;
+    }
+
+    .submenu .submenu {
+      top: 0;
+      left: 100%;
+    }
+
+    /* Show submenus when hovering */
+    .menu li:hover>.submenu {
+      display: block;
+    }
+
+    /* Mobile Menu styles */
+    .menu-toggle {
+      display: none;
+      background: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .submenu {
+        position: relative;
+      }
+
+      .submenu .submenu {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Content styles */
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    section p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Responsive Menu with Article</h1>
+  </header>
+
+  <nav>
+    <!-- Button to toggle the mobile menu -->
+    <div class="menu-toggle">Menu</div>
+
+    <!-- Main Menu -->
+    <ul class="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a>
+        <ul class="submenu">
+          <li><a href="#web">Web Design</a>
+            <ul class="submenu">
+              <li><a href="#frontend">Frontend</a></li>
+              <li><a href="#backend">Backend</a></li>
+            </ul>
+          </li>
+          <li><a href="#seo">SEO</a></li>
+          <li><a href="#marketing">Marketing</a>
+            <ul class="submenu">
+              <li><a href="#digital">Digital Marketing</a></li>
+              <li><a href="#social">Social Media</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to Our Website</h2>
+    <p>In this article, we will guide you through creating a responsive menu with 3-level submenus. This menu is suitable for both desktop and mobile users. Follow this guide to create an elegant and functional navigation system that will work well across all devices.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <p>We offer a variety of services, including:</p>
+    <ul>
+      <li>Web Design: Customize your website with beautiful layouts and interactive elements.</li>
+      <li>SEO: Enhance your website's search engine visibility to attract more visitors.</li>
+      <li>Marketing: Expand your reach through digital and social media marketing strategies.</li>
+    </ul>
+  </section>
+
+  <section id="about">
+    <h2>About This Menu</h2>
+    <p>In this section, we will explain the process of creating the responsive menu and how it functions. Here’s a breakdown of the important parts:</p>
+
+    <h3>1. HTML Structure</h3>
+    <p>The HTML structure consists of a navigation bar</p>
+    <pre><code>
+    &lt;ul class="menu"&gt;
+      &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#services"&gt;Services&lt;/a&gt;
+        &lt;ul class="submenu"&gt;
+          &lt;li&gt;&lt;a href="#web"&gt;Web Design&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  </code></pre>
+
+    <h3>2. CSS for Styling</h3>
+    <p>We use CSS to style the menu and make it responsive. Key points include:</p>
+    <ul>
+      <li>Using `display: flex` for desktop layout and `display: none` for mobile by default.</li>
+      <li>Using `:hover` to show submenus when the user hovers over a main menu item.</li>
+      <li>Media queries to change the layout on smaller screens, such as displaying the menu as a vertical list and allowing it to be toggled on mobile.</li>
+    </ul>
+
+    <h3>3. JavaScript for Mobile Toggle</h3>
+    <p>For mobile devices, we use JavaScript to allow users to toggle the menu. This is done by adding a click event to the "Menu" button (`.menu-toggle`) that toggles the visibility of the menu:</p>
+    <pre><code>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.menu').classList.toggle('active');
+    });
+  </code></pre>
+
+    <h3>4. Submenu Interaction</h3>
+    <p>The submenus are hidden by default, and only show up when you hover over their parent menu item on desktop devices. This is achieved using the CSS rule:</p>
+    <pre><code>
+    .menu li:hover &gt; .submenu {
+      display: block;
+    }
+  </code></pre>
+
+    <p>On mobile, submenus will be shown when clicking their parent menu item, making it more user-friendly on smaller screens.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or feedback about this example, feel free to reach out to us! We would love to hear from you.</p>
+  </section>
+
+  <script>
+    /* Toggle menu visibility on mobile */
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.menu').classList.toggle('active');
+    });
+  </script>
+
+</body>
+
+</html>
